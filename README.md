@@ -1,0 +1,1 @@
+- ถ้าจะเพิ่มฟังชั่น  datbase repos service ontroller

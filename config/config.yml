@@ -1,0 +1,6 @@
+environment: dev
+app:
+  port: 8080
+mongo:
+  username: root
+  password: gc742899

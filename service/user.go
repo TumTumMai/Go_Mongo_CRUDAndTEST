@@ -10,5 +10,6 @@ type UserResponse struct {
 type UserService interface {
 	GetUsers() ([]UserResponse, error)
 	GetUser(string) (*UserResponse, error)
-	Insert(user UserResponse) (*UserResponse, error)
+	Insert(UserResponse) (*UserResponse, error)
+	Update(string, UserResponse) (*UserResponse, error)
 }

@@ -33,3 +33,7 @@ func (cm *userRepositoryMock) Insert(user User) (*User, error) {
 	cm.Users = append(cm.Users, user)
 	return &user, nil
 }
+func (cm *userRepositoryMock) Update(id string, user User) (*User, error) {
+	cm.Users = append(cm.Users, user)
+	return &user, nil
+}

@@ -58,21 +58,14 @@ func (c userRepositoryDB) Insert(user User) (*User, error) {
 
 }
 
-// func Insert(c echo.Context) error {
-// 	coletion := Dbconnet.GetDatabase().Database("TESTMVC").Collection("user")
-// 	testuser := model.User{
-// 		// Name: "",
-// 		// City: "Samut",
-// 		// Age:  22, //////,ต้องมีอยุ่ตัวสุดท้าย ถ้าเป็น Go
-// 	}
-
-// 	if err := c.Bind(&testuser); err != nil {
-// 		return c.NoContent(http.StatusBadRequest)
-// 	}
-// 	res, err := coletion.InsertOne(Dbconnet.GetDatabasectx(), testuser)
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// 	fmt.Print(res)
-// 	return c.String(http.StatusOK, "InsertOk")
-// }
+func (c userRepositoryDB) Update(id string, user User) (*User, error) {
+	_id, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return nil, err
+	}
+	_, err = c.collection.UpdateOne(c.ctx, bson.M{"_id": _id}, bson.M{"$set": &user})
+	if err != nil {
+		return &user, err
+	}
+	return &user, nil
+}

@@ -42,6 +42,7 @@ func main() {
 	e.GET("/users", userHandler.GetAllUser)
 	e.GET("/user/:id", userHandler.GetUserById)
 	e.POST("/user", userHandler.Insert)
+	e.PUT("user/:id", userHandler.UpdateOne)
 
 	e.Start(fmt.Sprintf(":%v", config.App.Port))
 

@@ -72,3 +72,17 @@ func (us userService) Insert(user UserResponse) (*UserResponse, error) {
 	}
 	return &user, nil
 }
+
+func (us userService) Update(id string, user UserResponse) (*UserResponse, error) {
+	userUpdate := repository.User{
+		// UserID: user.ID,
+		Name: user.Name,
+		City: user.City,
+		Age:  user.Age,
+	}
+	_, err := us.userRepository.Update(id, userUpdate)
+	if err != nil {
+		panic(err)
+	}
+	return &user, nil
+}

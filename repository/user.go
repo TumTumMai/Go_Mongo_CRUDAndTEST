@@ -7,8 +7,9 @@ type User struct {
 	Age    int    `json:"age,omitempty" bson:"age,omitempty"`
 }
 
-type UserRepository interface {
+type UserRepository interface { /////(รับเเค่ type)
 	GetAll() ([]User, error)
 	GetById(string) (*User, error)
-	Insert(user User) (*User, error)
+	Insert(User) (*User, error)
+	Update(string, User) (*User, error)
 }

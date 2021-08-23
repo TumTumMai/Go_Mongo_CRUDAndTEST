@@ -54,4 +54,21 @@ func (h userHandler) Insert(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, users)
 }
+
 /////////////////////////////////
+func (h userHandler) UpdateOne(c echo.Context) error {
+	// users, err := h.userService.Insert(users)
+	callId := c.Param("id")
+	if callId == "" {
+		return c.JSON(http.StatusBadRequest, callId)
+	}
+	testuser := service.UserResponse{}
+	if err := c.Bind(&testuser); err != nil {
+		return c.NoContent(http.StatusBadRequest)
+	}
+	users, err := h.userService.Update(callId, testuser)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+	return c.JSON(http.StatusOK, users)
+}

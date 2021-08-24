@@ -75,14 +75,27 @@ func (us userService) Insert(user UserResponse) (*UserResponse, error) {
 
 func (us userService) Update(id string, user UserResponse) (*UserResponse, error) {
 	userUpdate := repository.User{
-		// UserID: user.ID,
-		Name: user.Name,
-		City: user.City,
-		Age:  user.Age,
+		UserID: user.ID,
+		Name:   user.Name,
+		City:   user.City,
+		Age:    user.Age,
 	}
 	_, err := us.userRepository.Update(id, userUpdate)
 	if err != nil {
 		panic(err)
 	}
 	return &user, nil
+}
+
+func (us userService) DeleteById(id string) (*string, error) {
+	id, err := us.userRepository.DeleteById(id)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, fmt.Errorf("not found")
+		}
+		fmt.Printf("err: %v\n", err)
+		return nil, err
+	}
+
+	return &id, err
 }

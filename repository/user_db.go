@@ -69,3 +69,37 @@ func (c userRepositoryDB) Update(id string, user User) (*User, error) {
 	}
 	return &user, nil
 }
+
+//////(id string) พารามิเตอร์ ตัวรับค่า (string, error)เป็นที่จะส่งออกไป
+
+func (c userRepositoryDB) DeleteById(id string) (string, error) {
+	_id, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		panic(err)
+	}
+
+	_, err = c.collection.DeleteOne(c.ctx, bson.M{"_id": _id})
+	if err != nil {
+		panic(err)
+	}
+
+	return id, nil
+}
+
+// id := c.Param("id")
+
+// 	coletion := Dbconnet.GetDatabase().Database("TESTMVC").Collection("user")
+// 	// objid, err := primitive.ObjectIDFromHex("6112341143062e8d442b584c")
+// 	objid, err := primitive.ObjectIDFromHex(id)
+
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	// var result = *mongo.DeleteResult
+// 	_, err = coletion.DeleteOne(Dbconnet.GetDatabasectx(), bson.M{"_id": objid})
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	// fmt.Println(result)
+
+// 	return c.String(http.StatusOK, "Delsusecfull")

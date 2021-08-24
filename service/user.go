@@ -12,4 +12,5 @@ type UserService interface {
 	GetUser(string) (*UserResponse, error)
 	Insert(UserResponse) (*UserResponse, error)
 	Update(string, UserResponse) (*UserResponse, error)
+	DeleteById(string) (*string, error)
 }

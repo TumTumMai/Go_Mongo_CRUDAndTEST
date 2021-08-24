@@ -12,4 +12,5 @@ type UserRepository interface { /////(รับเเค่ type)
 	GetById(string) (*User, error)
 	Insert(User) (*User, error)
 	Update(string, User) (*User, error)
+	DeleteById(string) (string, error)
 }

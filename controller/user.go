@@ -70,5 +70,20 @@ func (h userHandler) UpdateOne(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
+	fmt.Println(users)
 	return c.JSON(http.StatusOK, users)
+}
+
+func (h userHandler) DeleteById(c echo.Context) error {
+	// users, err := h.userService.Insert(users)
+	callId := c.Param("id")
+	if callId == "" {
+		return c.JSON(http.StatusBadRequest, callId)
+	}
+
+	id, err := h.userService.DeleteById(callId)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err)
+	}
+	return c.String(http.StatusOK, "Delsusecfull :"+*id)
 }
